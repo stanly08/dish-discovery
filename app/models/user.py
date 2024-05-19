@@ -1,11 +1,13 @@
 """
 This is the User model for storing the user details
 """
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ForeignKey
 from app.models.base import BaseModel
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db
+from app.models.role import Role
+
 
 class User(BaseModel, UserMixin, db.Model):
     """
@@ -24,10 +26,10 @@ class User(BaseModel, UserMixin, db.Model):
     """
     __tablename__ = 'users'
 
-    username = db.Column(String(50), unique=True, nullable=False)
-    email = db.Column(String(50), nullable=False, unique=True)
-    password = db.Column(String(255), nullable=False)
-    role_id = db.Column(Integer, nullable=True, default=1)
+    username = Column(String(50), unique=True, nullable=False)
+    email = Column(String(50), nullable=False, unique=True)
+    password = Column(String(255), nullable=False)
+    role_id = Column(Integer, ForeignKey('roles.id'), nullable=False, default=1)
 
     def __init__(self, username, email, password, role_id=1):
         """
