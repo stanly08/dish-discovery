@@ -30,7 +30,9 @@ class TestConfig(Config):
         DEBUG: This is set to True to enable debugging.
         SQLALCHEMY_DATABASE_URI: The URI for the test database.
         WTF_CSRF_ENABLED: This is set to False to disable CSRF protection.
+        TESTING: This is set to True to enable testing mode.
     """
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///test.db'
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
     WTF_CSRF_ENABLED = False

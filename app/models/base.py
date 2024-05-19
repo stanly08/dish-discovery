@@ -3,7 +3,7 @@ This is the base model for all the models
 """
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, DateTime
-from datetime import datetime
+from datetime import datetime, timezone
 
 Base = declarative_base()
 
@@ -21,11 +21,11 @@ class BaseModel(Base):
     Methods:
     __abstract__: This attribute is set to True to prevent SQLAlchemy from
     creating a table for this model.
-    
+
     """
     __abstract__ = True
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    created_at = Column(DateTime, default=datetime.now(datetime.UTC))
-    updated_at = Column(DateTime, default=datetime.now(datetime.UTC),
-                        onupdate=datetime.now(datetime.UTC))
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=datetime.now(timezone.utc),
+                        onupdate=datetime.now(timezone.utc))
