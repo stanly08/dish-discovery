@@ -35,6 +35,7 @@ class User(BaseModel, UserMixin, db.Model):
 
     recipes = relationship('Recipe', backref='user', lazy=True)
     comments = relationship('Comment', backref='user', lazy=True)
+    saved = relationship('Saved', backref='user', lazy=True)
 
     def __init__(self, username, email, password, role_id=1):
         """

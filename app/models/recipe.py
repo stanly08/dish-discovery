@@ -29,6 +29,7 @@ class Recipe(BaseModel, db.Model):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
     comments = relationship('Comment', backref='recipe', lazy=True)
+    saved = relationship('Saved', backref='recipe', lazy=True)
 
     def __init__(self, title, ingredients, instructions, image_url, user_id):
         """
