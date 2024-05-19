@@ -2,6 +2,7 @@ import unittest
 from app import create_app, db
 from app.models.recipe import Recipe
 from app.models.user import User
+from app.models.category import Category
 
 class TestRecipeModel(unittest.TestCase):
     """
@@ -45,7 +46,12 @@ class TestRecipeModel(unittest.TestCase):
         """
         Test recipe creation and retrieval.
         """
-        recipe = Recipe(title='Test Recipe', ingredients='Ingredient 1, Ingredient 2', instructions='Step 1, Step 2', image_url='test_image_url', user_id=self.user.id)
+        category = Category(name='Test Category')  # Create a Category instance
+        db.session.add(category)
+        db.session.commit()
+
+
+        recipe = Recipe(title='Test Recipe', ingredients='Ingredient 1, Ingredient 2', instructions='Step 1, Step 2', image_url='test_image_url', user_id=self.user.id, category_id=category.id)
         db.session.add(recipe)
         db.session.commit()
 
