@@ -7,6 +7,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db
 from app.models.role import Role
+from app.models.recipe import Recipe
+from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, UserMixin, db.Model):
@@ -30,6 +32,8 @@ class User(BaseModel, UserMixin, db.Model):
     email = Column(String(50), nullable=False, unique=True)
     password = Column(String(255), nullable=False)
     role_id = Column(Integer, ForeignKey('roles.id'), nullable=False, default=1)
+
+    recipes = relationship('Recipe', backref='user', lazy=True)
 
     def __init__(self, username, email, password, role_id=1):
         """
