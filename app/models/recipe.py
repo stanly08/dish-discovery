@@ -27,11 +27,13 @@ class Recipe(BaseModel, db.Model):
     instructions = Column(Text, nullable=False)
     image_url = Column(String(255), nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    category_id = Column(Integer, ForeignKey('recipecategories.id'), nullable=True)
+
 
     comments = relationship('Comment', backref='recipe', lazy=True)
-    saved = relationship('Saved', backref='recipe', lazy=True)
+    savedrecipes = relationship('SavedRecipe', backref='recipe', lazy=True)
 
-    def __init__(self, title, ingredients, instructions, image_url, user_id):
+    def __init__(self, title, ingredients, instructions, image_url, user_id, category_id=None):
         """
         The constructor for the Recipe class.
 
@@ -46,6 +48,7 @@ class Recipe(BaseModel, db.Model):
         self.instructions = instructions
         self.image_url = image_url
         self.user_id = user_id
+        self.category_id = category_id
 
     def __repr__(self):
         """

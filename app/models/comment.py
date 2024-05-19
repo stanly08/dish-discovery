@@ -5,6 +5,8 @@ from sqlalchemy import Column, String, ForeignKey, Integer
 from app.models.base import BaseModel
 from app import db
 from sqlalchemy.orm import relationship
+from app.models.recipe import Recipe
+from app.models.user import User
 
 
 class Comment(BaseModel, db.Model):

@@ -2,6 +2,7 @@ import unittest
 from app.models.comment import Comment
 from app.models.user import User
 from app.models.recipe import Recipe
+from app.models.category import Category
 from app import create_app, db
 
 class TestCommentModel(unittest.TestCase):
@@ -35,12 +36,16 @@ class TestCommentModel(unittest.TestCase):
         db.session.add_all([user1, user2])
         db.session.commit()
 
+        category = Category(name='Test Category')
+        db.session.add(category)
+        db.session.commit()
+
         recipe1 = Recipe(title='Recipe 1', ingredients='Ingredient 1', 
                          instructions='Step 1', image_url='https://example.com/image1.jpg',
-                         user_id=user1.id)
+                         user_id=user1.id, category_id=category.id)
         recipe2 = Recipe(title='Recipe 2', ingredients='Ingredient 2', 
                          instructions='Step 2', image_url='https://example.com/image2.jpg',
-                         user_id=user2.id)
+                         user_id=user2.id, category_id=category.id)
         db.session.add_all([recipe1, recipe2])
         db.session.commit()
 

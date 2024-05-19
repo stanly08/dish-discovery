@@ -7,7 +7,7 @@ from app import db
 from sqlalchemy.orm import relationship
 
 
-class Saved(BaseModel, db.Model):
+class SavedRecipe(BaseModel, db.Model):
     """
     This is the Saved model for storing the saved recipes details.
 
