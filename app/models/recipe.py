@@ -4,6 +4,7 @@ This is the recipe model for storing the recipe details
 from sqlalchemy import Column, String, Integer, ForeignKey, Text
 from app.models.base import BaseModel
 from app import db
+from sqlalchemy.orm import relationship
 
 
 class Recipe(BaseModel, db.Model):
@@ -26,6 +27,8 @@ class Recipe(BaseModel, db.Model):
     instructions = Column(Text, nullable=False)
     image_url = Column(String(255), nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+    comments = relationship('Comment', backref='recipe', lazy=True)
 
     def __init__(self, title, ingredients, instructions, image_url, user_id):
         """

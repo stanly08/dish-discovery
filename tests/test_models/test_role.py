@@ -38,20 +38,13 @@ class TestRoleModel(unittest.TestCase):
         self.session.commit()
 
         retrieved_role = Role.query.filter_by(name='Admin').first()
-        print(f"Retrieved role: {retrieved_role}")
-        print(f"Retrieved role id: {retrieved_role.id}")
-        print(f"Retrieved role created_at: {retrieved_role.created_at}")
-        print(f"Retrieved role updated_at: {retrieved_role.updated_at}")
+
         self.assertIsNotNone(retrieved_role)
         self.assertIsInstance(retrieved_role, Role)
         self.assertEqual(retrieved_role.name, 'Admin')
         self.assertEqual(retrieved_role.description, 'Administrator role')
 
         retrieved_role2 = Role.query.filter_by(name='User').first()
-        print(f"Retrieved role: {retrieved_role2}")
-        print(f"Retrieved role id: {retrieved_role2.id}")
-        print(f"Retrieved role created_at: {retrieved_role2.created_at}")
-        print(f"Retrieved role updated_at: {retrieved_role2.updated_at}")
         self.assertIsNotNone(retrieved_role2)
         self.assertIsInstance(retrieved_role2, Role)
         self.assertEqual(retrieved_role2.name, 'User')

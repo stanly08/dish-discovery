@@ -43,22 +43,11 @@ class TestUserModel(unittest.TestCase):
         This is a test method to test the User model.
         """
         user = User(username='test_user', email="test@alx.com", password="test")
-        user2 = User(username='test_usr', email="mm@alx.com", password="mom")
         self.session.add(user)
-        self.session.add(user2)
         self.session.commit()
 
         retrieved_user = User.query.filter_by(username='test_user').first()
-        print(f"Retrieved user: {retrieved_user}")
-        print(f"Retrieved user id: {retrieved_user.id}")
-        print(f"Retrieved user created_at: {retrieved_user.created_at}")
-        print(f"Retrieved user updated_at: {retrieved_user.updated_at}")
 
-        retrieved_user2 = User.query.filter_by(username='test_usr').first()
-        print(f"Retrieved user: {retrieved_user2}")
-        print(f"Retrieved user id: {retrieved_user2.id}")
-        print(f"Retrieved user created_at: {retrieved_user2.created_at}")
-        print(f"Retrieved user updated_at: {retrieved_user2.updated_at}")
         self.assertIsNotNone(retrieved_user)
         self.assertIsInstance(retrieved_user, User)
         self.assertEqual(retrieved_user.username, 'test_user')

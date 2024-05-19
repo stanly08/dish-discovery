@@ -49,12 +49,6 @@ class TestRecipeModel(unittest.TestCase):
         db.session.add(recipe)
         db.session.commit()
 
-        print(f"Recipe: {recipe}")
-        print(f"Recipe id: {recipe.id}")
-        print(f"Recipe created_at: {recipe.created_at}")
-        print(f"Recipe updated_at: {recipe.updated_at}")
-        print(f"Recipe user: {recipe.user}" )
-
         retrieved_recipe = Recipe.query.filter_by(title='Test Recipe').first()
         self.assertIsNotNone(retrieved_recipe)
         self.assertEqual(retrieved_recipe.title, 'Test Recipe')
