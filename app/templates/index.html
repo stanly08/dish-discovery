@@ -1,21 +1,16 @@
-<!-- templates/home.html -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Home</title>
-  </head>
-  <body>
-    {% if current_user.is_authenticated %}
-    <h1>{{ current_user.username }}, Welcome to Dish Discovery</h1>
-    <p>We are loading recipes soon</p>
-    <div><a href="{{ url_for('home.logout') }}">Logout</a></div>
-    {% else %}
-    <h1>Dish Discovery</h1>
-    <div><a href="{{ url_for('home.login') }}">Login</a></div>
-    <div><a href="{{ url_for('home.register') }}">Register</a></div>
-    <p>This is the homepage for dish discovery</p>
-    <p>Login and Discover new dishes and share your own</p>
-    {% endif %}
-  </body>
-</html>
+{% extends "base.html" %} {% block title %}Home - Dish Discovery{% endblock %} {% block content %}
+<div class="jumbotron">
+  {% if current_user.is_authenticated %}
+  <h1 class="display-4">Hello, {{ current_user.username }}!</h1>
+  <p class="lead">
+    Dish discovery recommends dishes based on your preferences. You can also add your own dishes to the database.
+  </p>
+  <hr class="my-4" />
+  <p>We are coming live very soon</p>
+  {% else %}
+  <h1 class="display-4">Welcome to Dish Discovery!</h1>
+  <p class="lead">Dish discovery recommends dishes based on your preferences. Sign Up Today to get started.</p>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  {% endif %}
+</div>
+{% endblock %}
