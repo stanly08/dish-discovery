@@ -7,12 +7,15 @@
   </head>
   <body>
     {% if current_user.is_authenticated %}
-    <h1>Welcome, {{ current_user.username }}</h1>
+    <h1>{{ current_user.username }}, Welcome to Dish Discovery</h1>
+    <p>We are loading recipes soon</p>
     <div><a href="{{ url_for('home.logout') }}">Logout</a></div>
     {% else %}
+    <h1>Dish Discovery</h1>
     <div><a href="{{ url_for('home.login') }}">Login</a></div>
     <div><a href="{{ url_for('home.register') }}">Register</a></div>
-    <h1>Home Page</h1>
+    <p>This is the homepage for dish discovery</p>
+    <p>Login and Discover new dishes and share your own</p>
     {% endif %}
   </body>
 </html>
