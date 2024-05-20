@@ -5,4 +5,4 @@ Flask-WTF
 Flask-CORS
 requests
 Flask-Migrate
-
+email_validator

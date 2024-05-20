@@ -38,7 +38,9 @@ def create_app(config_class=None):
         return User.query.get(int(user_id))
 
     """Import the blueprints."""
+    from app.routes.home import home_bp
 
     """Register the blueprints."""
+    app.register_blueprint(home_bp)
 
     return app
