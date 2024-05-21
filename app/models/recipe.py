@@ -29,11 +29,17 @@ class Recipe(BaseModel, db.Model):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     category_id = Column(Integer, ForeignKey('recipecategories.id'), nullable=True)
 
-
     comments = relationship('Comment', backref='recipe', lazy=True)
     savedrecipes = relationship('SavedRecipe', backref='recipe', lazy=True)
 
-    def __init__(self, title, ingredients, instructions, image_url, user_id, category_id=None):
+    def __init__(self,
+                 title,
+                 ingredients,
+                 instructions,
+                 user_id,
+                 image_url=None,
+                 description=None,
+                 category_id=None):
         """
         The constructor for the Recipe class.
 
@@ -44,6 +50,7 @@ class Recipe(BaseModel, db.Model):
             user_id: The user id of the user who created the recipe.
         """
         self.title = title
+        self.description = description
         self.ingredients = ingredients
         self.instructions = instructions
         self.image_url = image_url
@@ -61,3 +68,20 @@ class Recipe(BaseModel, db.Model):
         This method returns a string representation of the Recipe object.
         """
         return f'{self.title}'
+    
+    def to_dict(self):
+        """
+        This method returns a dict representation of the recipe
+        """
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'ingredients': self.ingredients,
+            'instructions': self.instructions,
+            'image_url': self.image_url,
+            'user_id': self.user_id,
+            'category_id': self.category_id,
+            'comments': [comment.to_dict() for comment in self.comments],
+            'savedrecipes': [savedrecipe.to_dict() for savedrecipe in self.savedrecipes]
+        }

@@ -13,4 +13,23 @@
   <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   {% endif %}
 </div>
+
+<!-- Display 10 recipes -->
+<div class="container">
+  <h2>Recent Recipes</h2>
+  <div class="row">
+    {% for recipe in recipes %}
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe.title }}</h5>
+          <p class="card-text">{{ recipe.description }}</p>
+          <a href="/recipe/{{ recipe.id }}" class="btn btn-primary">View Recipe</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

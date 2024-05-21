@@ -1,0 +1,61 @@
+<!-- create_recipe.html -->
+{% extends "base.html" %} {% block title %}Create Recipe - Dish Discovery{% endblock %} {% block content %}
+<form id="recipeForm" action="/new_recipe" method="POST">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title:</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Title" required />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description:</label>
+    <input type="text" class="form-control" id="description" name="description" placeholder="Description" required />
+  </div>
+  <div class="mb-3">
+    <label for="ingredients" class="form-label">Ingredients:</label>
+    <textarea class="form-control" id="ingredients" name="ingredients" placeholder="Ingredients" rows="3" required></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="instructions" class="form-label">Instructions:</label>
+    <textarea class="form-control" id="instructions" name="instructions" placeholder="Instructions" rows="3" required></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="image_url" class="form-label">Image URL:</label>
+    <input type="text" class="form-control" id="image_url" name="image_url" placeholder="Image URL" />
+  </div>
+  <div class="mb-3">
+    <label for="category_id" class="form-label">Category ID:</label>
+    <input type="text" class="form-control" id="category_id" name="category_id" placeholder="Category ID" />
+  </div>
+  <button type="submit" class="btn btn-primary">Create Recipe</button>
+</form>
+
+<script>
+  document.getElementById("recipeForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    const formData = new FormData(this);
+
+    // Convert form data to JSON
+    const jsonData = {};
+    formData.forEach((value, key) => {
+      jsonData[key] = value;
+    });
+
+    // Send JSON data to server
+    fetch("/new_recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonData),
+    })
+      .then((response) => {
+        // Handle response
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+</script>
+
+{% endblock %}

@@ -32,3 +32,19 @@ class Role(BaseModel, db.Model):
         """
         self.name = name
         self.description = description
+
+    def seed_roles():
+        """
+        This method is used to seed the roles table with default roles.
+        """
+        roles = [
+            {'name': 'user', 'description': 'User'},
+            {'name': 'admin', 'description': 'Administrator'},
+        ]
+        for item in roles:
+            role = Role.query.filter_by(name=item['name']).first()
+            if not role:
+                role = Role(name=item['name'], description=item['description'])
+                db.session.add(role)
+                db.session.commit()
+        return True

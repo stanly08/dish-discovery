@@ -31,3 +31,13 @@ class SavedRecipe(BaseModel, db.Model):
         """
         self.user_id = user_id
         self.recipe_id = recipe_id
+
+    def to_dict(self):
+        """
+        This is a dict representation of the savedrecipe
+        """
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id
+        }
