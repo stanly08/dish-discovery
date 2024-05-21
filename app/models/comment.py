@@ -49,3 +49,12 @@ class Comment(BaseModel, db.Model):
         This method returns a string representation of the Comment object.
         """
         return f'{self.content}'
+    
+    def to_dict(self):
+        """This is a dict representation of the comments"""
+        return {
+            'id': self.id,
+            'text': self.content,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id
+        }

@@ -39,8 +39,20 @@ def create_app(config_class=None):
 
     """Import the blueprints."""
     from app.routes.home import home_bp
+    from app.routes.recipe import recipe_bp
 
     """Register the blueprints."""
     app.register_blueprint(home_bp)
+    app.register_blueprint(recipe_bp)
+
+
+    with app.app_context():
+        """Create the tables."""
+        db.create_all()
+
+        """seed roles"""
+        from app.models import Role, Category
+        Role.seed_roles()
+        Category.seed_categories()
 
     return app

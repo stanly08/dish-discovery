@@ -63,3 +63,11 @@ class User(BaseModel, UserMixin, db.Model):
         This method is used to check if the password is correct.
         """
         return check_password_hash(self.password, password)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'role_id': self.role_id
+        }

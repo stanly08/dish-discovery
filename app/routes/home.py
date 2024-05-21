@@ -3,7 +3,7 @@ This is the login route for the application."""
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from app import db, login_manager
-from app.models.user import User
+from app.models import User, Recipe
 from app.forms.login import LoginForm, RegistrationForm
 from flask import Blueprint
 from werkzeug.security import check_password_hash
@@ -48,7 +48,9 @@ def logout():
 
 @home_bp.route('/')
 def index():
-    return render_template('index.html')
+    """Home Page"""
+    recipes = Recipe.query.order_by(Recipe.created_at.desc()).limit(6).all()
+    return render_template('index.html', recipes=recipes)
 
 @home_bp.route('/register', methods=['GET', 'POST'])
 def register():
