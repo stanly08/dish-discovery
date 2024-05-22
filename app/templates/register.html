@@ -1,32 +1,66 @@
-{% extends "base.html" %} {% block title %}Dish Discovery User Registration{% endblock %} {% block content %}
-<h1>Register</h1>
-
-<form method="POST" action="{{ url_for('home.register') }}">
-  {{ form.hidden_tag() }}
-  <div class="form-group">
-    {{ form.username.label(class="form-label") }} {{ form.username(class="form-control", size=32) }} {% for error in
-    form.username.errors %}
-    <div class="text-danger">[{{ error }}]</div>
-    {% endfor %}
+{% extends "base.html" %} {% block title %} Dish Discovery User Registration {% endblock %} {% block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Register</h1>
+  <div class="row justify-content-center">
+    <div class="col-lg-4 d-flex align-items-center mb-4 mb-lg-0">
+      <img class="img-fluid" src="{{ url_for('static', filename='img/food.jpg') }}" alt="Registration Image" />
+    </div>
+    <div class="col-lg-6">
+      <section class="position-relative py-4 py-xl-5">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+              <div class="card mb-5 p-4">
+                <div class="card-body d-flex flex-column align-items-center">
+                  <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1em"
+                      height="1em"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                      class="bi bi-person"
+                    >
+                      <path
+                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <form method="POST" action="{{ url_for('home.register') }}" class="text-center w-100">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                      {{ form.username.label(class="form-label") }} {{ form.username(class="form-control") }} {% for error in
+                      form.username.errors %}
+                      <div class="text-danger">{{ error }}</div>
+                      {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                      {{ form.email.label(class="form-label") }} {{ form.email(class="form-control") }} {% for error in
+                      form.email.errors %}
+                      <div class="text-danger">{{ error }}</div>
+                      {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                      {{ form.password.label(class="form-label") }} {{ form.password(class="form-control") }} {% for error in
+                      form.password.errors %}
+                      <div class="text-danger">{{ error }}</div>
+                      {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                      {{ form.confirm_password.label(class="form-label") }} {{ form.confirm_password(class="form-control") }} {%
+                      for error in form.confirm_password.errors %}
+                      <div class="text-danger">{{ error }}</div>
+                      {% endfor %}
+                    </div>
+                    <div class="mb-3">{{ form.submit(class="btn btn-primary d-block w-100") }}</div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
-  <div class="form-group">
-    {{ form.email.label(class="form-label") }} {{ form.email(class="form-control", size=32) }} {% for error in form.email.errors
-    %}
-    <div class="text-danger">[{{ error }}]</div>
-    {% endfor %}
-  </div>
-  <div class="form-group">
-    {{ form.password.label(class="form-label") }} {{ form.password(class="form-control", size=32) }} {% for error in
-    form.password.errors %}
-    <div class="text-danger">[{{ error }}]</div>
-    {% endfor %}
-  </div>
-  <div class="form-group">
-    {{ form.confirm_password.label(class="form-label") }} {{ form.confirm_password(class="form-control", size=32) }} {% for error
-    in form.confirm_password.errors %}
-    <div class="text-danger">[{{ error }}]</div>
-    {% endfor %}
-  </div>
-  <div class="form-group">{{ form.submit(class="btn btn-primary") }}</div>
-</form>
+</div>
 {% endblock %}
