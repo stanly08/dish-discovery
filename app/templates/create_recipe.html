@@ -1,6 +1,5 @@
-<!-- create_recipe.html -->
-{% extends "base.html" %} {% block title %}Create Recipe - Dish Discovery{% endblock %} {% block content %}
-<form id="recipeForm" action="/new_recipe" method="POST">
+{% extends "base.html" %} {% block title %} Create Recipe - Dish Discovery {% endblock %} {% block content %}
+<form id="recipeForm" action="/new_recipe" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="title" class="form-label">Title:</label>
     <input type="text" class="form-control" id="title" name="title" placeholder="Title" required />
@@ -18,44 +17,49 @@
     <textarea class="form-control" id="instructions" name="instructions" placeholder="Instructions" rows="3" required></textarea>
   </div>
   <div class="mb-3">
-    <label for="image_url" class="form-label">Image URL:</label>
-    <input type="text" class="form-control" id="image_url" name="image_url" placeholder="Image URL" />
+    <label for="image_file" class="form-label">Image:</label>
+    <input type="file" class="form-control" id="image_file" name="image_file" />
   </div>
   <div class="mb-3">
-    <label for="category_id" class="form-label">Category ID:</label>
-    <input type="text" class="form-control" id="category_id" name="category_id" placeholder="Category ID" />
+    <label for="category" class="form-label">Category:</label>
+    <select class="form-control" id="category" name="category" required>
+      <option value="">Select Category</option>
+      {% for category in categories %}
+      <option value="{{ category.id }}">{{ category.name }}</option>
+      {% endfor %}
+    </select>
+    <input type="hidden" id="category_id" name="category_id" />
   </div>
   <button type="submit" class="btn btn-primary">Create Recipe</button>
 </form>
 
 <script>
-  document.getElementById("recipeForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission
+  document.getElementById("category").addEventListener("change", function () {
+    const selectedCategory = this.options[this.selectedIndex];
+    document.getElementById("category_id").value = selectedCategory.value;
+  });
 
-    // Get form data
+  document.getElementById("recipeForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
     const formData = new FormData(this);
 
-    // Convert form data to JSON
-    const jsonData = {};
-    formData.forEach((value, key) => {
-      jsonData[key] = value;
-    });
-
-    // Send JSON data to server
     fetch("/new_recipe", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jsonData),
+      body: formData,
     })
       .then((response) => {
-        // Handle response
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   });
 </script>
-
 {% endblock %}

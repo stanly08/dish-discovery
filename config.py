@@ -21,6 +21,7 @@ class Config:
     SQLALCHEMY_RECORD_QUERIES = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
     WTF_CSRF_ENABLED = True
+    UPLOAD_FOLDER = 'app/static/uploads'
 
 class TestConfig(Config):
     """
