@@ -208,10 +208,10 @@ Returns the profile and recipes of a specific user.
 To use Mysql
 ```sh
     pip install flask-mysqldb
-    ```
+```
 ```sh
     pip install mysqlclient
-    ```
+```
 
 Update the Config.py
 
