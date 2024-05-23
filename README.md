@@ -115,7 +115,7 @@ Deletes a specific recipe.
   - Status Code: `404` if recipe not found
   - Status Code: `500` if server error
 
-## 4. Save a Recipe
+### 4. Save a Recipe
 
 **URL:** `/recipe/<int:recipe_id>/save`  
 **Method:** `POST`  
