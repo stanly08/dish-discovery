@@ -24,3 +24,5 @@ venv.bak
 # Flask-SQLAlchemy database
 *.db
 
+**/migrations/
+
