@@ -77,10 +77,14 @@ def get_recipe(recipe_id):
     if not recipe:
         return jsonify({'error': 'Recipe Not Found'})
     
+    # Increment the view count
+    recipe.views += 1
+    db.session.commit()
+    
     user = recipe.user.to_dict() if recipe.user else None
     category = recipe.category.to_dict() if recipe.category else None
     comments = [comment.to_dict() for comment in recipe.comments]
-
+    
     """constructing the json response"""
     recipe_dict = recipe.to_dict()
     recipe_dict['user'] = user
@@ -88,4 +92,3 @@ def get_recipe(recipe_id):
     recipe_dict['comments'] = comments
 
     return jsonify(recipe_dict)
-

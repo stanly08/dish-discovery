@@ -6,7 +6,7 @@ from app import db
 save_unsave_recipe_bp = Blueprint('save_unsave_recipe', __name__)
 
 
-@recipe_bp.route('/recipe/<int:recipe_id>/save', methods=['POST'])
+@save_unsave_recipe_bp.route('/recipe/<int:recipe_id>/save', methods=['POST'])
 @login_required
 def save_recipe(recipe_id):
     """
@@ -27,7 +27,7 @@ def save_recipe(recipe_id):
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-@recipe_bp.route('/recipe/<int:recipe_id>/unsave', methods=['DELETE'])
+@save_unsave_recipe_bp.route('/recipe/<int:recipe_id>/unsave', methods=['DELETE'])
 @login_required
 def unsave_recipe(recipe_id):
     """

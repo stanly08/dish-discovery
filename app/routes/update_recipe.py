@@ -7,7 +7,7 @@ import os
 
 update_recipe_bp = Blueprint('update_recipe', __name__)
 
-@recipe_bp.route('/recipe/<int:recipe_id>/edit', methods=['GET', 'POST'])
+@update_recipe_bp.route('/recipe/<int:recipe_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_recipe(recipe_id):
     """

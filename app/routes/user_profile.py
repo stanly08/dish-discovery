@@ -4,7 +4,7 @@ from app.models import User, Recipe
 user_profile_bp = Blueprint('user_profile', __name__)
 
 
-@home_bp.route('/user/<int:user_id>', methods=['GET'])
+@user_profile_bp.route('/user/<int:user_id>', methods=['GET'])
 def user_profile(user_id):
     """
     This function returns the user's profile and their recipes.

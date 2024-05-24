@@ -4,7 +4,7 @@ from app.models import Recipe
 search_recipes_bp = Blueprint('search_recipes', __name__)
 
 
-@recipe_bp.route('/search', methods=['GET'])
+@search_recipes_bp.route('/search', methods=['GET'])
 def search_recipes():
     """
     This function handles searching for recipes.

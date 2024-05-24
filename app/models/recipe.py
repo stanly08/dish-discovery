@@ -28,6 +28,7 @@ class Recipe(BaseModel, db.Model):
     image_url = Column(String(255), nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     category_id = Column(Integer, ForeignKey('recipecategories.id'), nullable=True)
+    views = Column(Integer, default=0)
 
     comments = relationship('Comment', backref='recipe', lazy=True)
     savedrecipes = relationship('SavedRecipe', backref='recipe', lazy=True)
@@ -56,6 +57,7 @@ class Recipe(BaseModel, db.Model):
         self.image_url = image_url
         self.user_id = user_id
         self.category_id = category_id
+        self.views = 0
 
     def __repr__(self):
         """
@@ -82,6 +84,7 @@ class Recipe(BaseModel, db.Model):
             'image_url': self.image_url,
             'user_id': self.user_id,
             'category_id': self.category_id,
+            'views': self.views,
             'comments': [comment.to_dict() for comment in self.comments],
             'savedrecipes': [savedrecipe.to_dict() for savedrecipe in self.savedrecipes]
         }

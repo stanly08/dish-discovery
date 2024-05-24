@@ -6,7 +6,7 @@ from app import db
 delete_recipe_bp = Blueprint('delete_recipe', __name__)
 
 
-@recipe_bp.route('/recipe/<int:recipe_id>/delete', methods=['DELETE'])
+@delete_recipe_bp.route('/recipe/<int:recipe_id>/delete', methods=['DELETE'])
 @login_required
 def delete_recipe(recipe_id):
     """

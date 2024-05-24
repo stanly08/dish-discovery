@@ -40,10 +40,18 @@ def create_app(config_class=None):
     """Import the blueprints."""
     from app.routes.home import home_bp
     from app.routes.recipe import recipe_bp
+    from app.routes.update_recipe import update_recipe_bp
+    from app.routes.user_profile import user_profile_bp
+    from app.routes.save_unsave_recipe import save_unsave_recipe_bp
+    from app.routes.search_recipes import search_recipes_bp
 
     """Register the blueprints."""
     app.register_blueprint(home_bp)
     app.register_blueprint(recipe_bp)
+    app.register_blueprint(update_recipe_bp)
+    app.register_blueprint(user_profile_bp)
+    app.register_blueprint(save_unsave_recipe_bp)
+    app.register_blueprint(search_recipes_bp)
 
 
     with app.app_context():
