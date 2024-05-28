@@ -30,8 +30,8 @@ class Recipe(BaseModel, db.Model):
     category_id = Column(Integer, ForeignKey('recipecategories.id'), nullable=True)
     views = Column(Integer, default=0)
 
-    comments = relationship('Comment', backref='recipe', lazy=True)
-    savedrecipes = relationship('SavedRecipe', backref='recipe', lazy=True)
+    comments = relationship('Comment', backref='recipe', lazy=True, cascade='all, delete-orphan')
+    savedrecipes = relationship('SavedRecipe', backref='recipe', lazy=True, cascade='all, delete-orphan')
 
     def __init__(self,
                  title,

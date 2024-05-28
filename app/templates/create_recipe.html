@@ -41,7 +41,6 @@
 
   document.getElementById("recipeForm").addEventListener("submit", function (event) {
     event.preventDefault();
-
     const formData = new FormData(this);
 
     fetch("/new_recipe", {

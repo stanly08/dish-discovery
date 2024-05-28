@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, url_for, current_app
 from flask_login import login_required, current_user
-from app.models import Recipe
+from app.models import Recipe, Category
 from app import db, Config
 from werkzeug.utils import secure_filename
 import os

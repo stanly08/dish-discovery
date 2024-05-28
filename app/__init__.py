@@ -1,7 +1,7 @@
 """
 File for the app package.
 """
-from flask import Flask
+from flask import Flask, Markup
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -36,6 +36,12 @@ def create_app(config_class=None):
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+    """Register custom Jinja filter"""
+    @app.template_filter('nl2br')
+    def nl2br_filter(s):
+        return Markup.escape(s).replace('\n', Markup('<br>\n'))
+
 
     """Import the blueprints."""
     from app.routes.home import home_bp

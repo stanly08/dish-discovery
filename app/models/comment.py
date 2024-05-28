@@ -54,7 +54,9 @@ class Comment(BaseModel, db.Model):
         """This is a dict representation of the comments"""
         return {
             'id': self.id,
-            'text': self.content,
+            'content': self.content,
             'user_id': self.user_id,
-            'recipe_id': self.recipe_id
+            'recipe_id': self.recipe_id,
+            'user': self.user.to_dict() if self.user else None,
+            'created_at': self.created_at,
         }

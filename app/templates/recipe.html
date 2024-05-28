@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block title %} Recipe - Dish Discovery {% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{ recipe.title }}</h1>
+      <div class="mb-4">
+        <div class="fixed-image">
+          <img src="{{ recipe.image_url }}" alt="Recipe Image" class="img-fluid rounded" />
+        </div>
+      </div>
+      <div class="mb-4">
+        <h2>Description</h2>
+        <p class="lead">{{ recipe.description | safe | nl2br }}</p>
+      </div>
+      <div class="mb-4">
+        <h2>Ingredients</h2>
+        <p>{{ recipe.ingredients | safe | nl2br }}</p>
+      </div>
+      <div class="mb-4">
+        <h2>Instructions</h2>
+        <p>{{ recipe.instructions | safe | nl2br }}</p>
+      </div>
+      <div class="mb-4">
+        <h2>Category</h2>
+        <p>{{ recipe.category.name }} - {{ recipe.category.description }}</p>
+      </div>
+      <div class="mb-4"><strong>Posted by:</strong> {{ recipe.user.username }} ({{ recipe.user.email }})</div>
+
+      <h2>Comments</h2>
+      {% if recipe.comments %}
+      <ul class="list-unstyled">
+        {% for comment in recipe.comments %}
+        <li class="mb-3">
+          <strong>{{ comment.user.username }}</strong>: {{ comment.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+          <hr />
+          <p>{{ comment.content | safe | nl2br }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No comments yet.</p>
+      {% endif %} {% if current_user.is_authenticated and current_user.id == recipe.user_id %}
+      <div class="mt-4">
+        <a href="{{ url_for('recipe.edit_recipe', recipe_id=recipe.id) }}" class="btn btn-primary mr-3">Edit Recipe</a>
+        <form action="{{ url_for('recipe.delete_recipe', recipe_id=recipe.id) }}" method="post" style="display: inline">
+          <button type="submit" class="btn btn-danger">Delete Recipe</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+    {% if current_user.is_authenticated %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Add a Comment</h5>
+          <form action="{{ url_for('recipe.add_comment', recipe_id=recipe.id) }}" method="post">
+            <div class="form-group">
+              <textarea class="form-control" name="content" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

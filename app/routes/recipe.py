@@ -1,9 +1,9 @@
 """
 This is the file for the recipe routes
 """
-from flask import Blueprint, request, jsonify, render_template, url_for, current_app
+from flask import Blueprint, request, jsonify, render_template, url_for, current_app, redirect
 from flask_login import login_required, current_user
-from app.models import Recipe, Category
+from app.models import Recipe, Category, Comment
 from app import db, Config
 from werkzeug.utils import secure_filename
 import os
@@ -44,7 +44,7 @@ def create_recipe():
         
         db.session.add(recipe)
         db.session.commit()
-        return jsonify(recipe.to_dict()), 201
+        return redirect(url_for('home.index'))
     
     except Exception as e:
         db.session.rollback()
@@ -77,10 +77,6 @@ def get_recipe(recipe_id):
     if not recipe:
         return jsonify({'error': 'Recipe Not Found'})
     
-    # Increment the view count
-    recipe.views += 1
-    db.session.commit()
-    
     user = recipe.user.to_dict() if recipe.user else None
     category = recipe.category.to_dict() if recipe.category else None
     comments = [comment.to_dict() for comment in recipe.comments]
@@ -91,4 +87,41 @@ def get_recipe(recipe_id):
     recipe_dict['category'] = category
     recipe_dict['comments'] = comments
 
-    return jsonify(recipe_dict)
+    return render_template('recipe.html', recipe=recipe_dict)
+
+
+@recipe_bp.route('/recipe/<int:recipe_id>/comment', methods=['POST'])
+@login_required
+def add_comment(recipe_id):
+    content = request.form['content']
+    comment = Comment(content=content, user_id=current_user.id, recipe_id=recipe_id)
+    db.session.add(comment)
+    db.session.commit()
+    return redirect(url_for('recipe.get_recipe', recipe_id=recipe_id))
+
+@recipe_bp.route('/recipe/<int:recipe_id>/edit', methods=['POST'])
+@login_required
+def edit_recipe(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    if recipe.user_id != current_user.id:
+        return render_template('error.html', message='You do not have permission to edit this recipe'), 403
+
+    recipe.title = request.form['title']
+    recipe.description = request.form['description']
+    recipe.ingredients = request.form['ingredients']
+    recipe.instructions = request.form['instructions']
+    db.session.commit()
+    return redirect(url_for('recipe.get_recipe', recipe_id=recipe_id))
+
+@recipe_bp.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
+@login_required
+def delete_recipe(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    if recipe.user_id != current_user.id:
+        return render_template('error.html', message='You do not have permission to delete this recipe'), 403
+
+    db.session.delete(recipe)
+    db.session.commit()
+    return redirect(url_for('home.index'))
+
+
