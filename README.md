@@ -26,7 +26,7 @@ Dish discovery is a web application that allows users to create and share their 
 3. Create a virtual environment:
 
    ```
-   python -m venv venv
+   python3 -m venv venv
    ```
 
 4. Activate the virtual environment:
@@ -63,7 +63,7 @@ Dish discovery is a web application that allows users to create and share their 
    flask run
    ```
 
-8. Naviage to the home page `http://127.0.0.1:5000'
+8. Navigate to the home page `http://127.0.0.1:5000'
 
 ## API Endpoints
 
