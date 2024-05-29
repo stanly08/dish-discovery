@@ -1,65 +1,123 @@
-{% extends "base.html" %} {% block title %} Create Recipe - Dish Discovery {% endblock %} {% block content %}
-<form id="recipeForm" action="/new_recipe" method="POST" enctype="multipart/form-data">
-  <div class="mb-3">
-    <label for="title" class="form-label">Title:</label>
-    <input type="text" class="form-control" id="title" name="title" placeholder="Title" required />
-  </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description:</label>
-    <input type="text" class="form-control" id="description" name="description" placeholder="Description" required />
-  </div>
-  <div class="mb-3">
-    <label for="ingredients" class="form-label">Ingredients:</label>
-    <textarea class="form-control" id="ingredients" name="ingredients" placeholder="Ingredients" rows="3" required></textarea>
-  </div>
-  <div class="mb-3">
-    <label for="instructions" class="form-label">Instructions:</label>
-    <textarea class="form-control" id="instructions" name="instructions" placeholder="Instructions" rows="3" required></textarea>
-  </div>
-  <div class="mb-3">
-    <label for="image_file" class="form-label">Image:</label>
-    <input type="file" class="form-control" id="image_file" name="image_file" />
-  </div>
-  <div class="mb-3">
-    <label for="category" class="form-label">Category:</label>
-    <select class="form-control" id="category" name="category" required>
-      <option value="">Select Category</option>
-      {% for category in categories %}
-      <option value="{{ category.id }}">{{ category.name }}</option>
-      {% endfor %}
-    </select>
-    <input type="hidden" id="category_id" name="category_id" />
-  </div>
-  <button type="submit" class="btn btn-primary">Create Recipe</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create and Share Recipe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://i.pinimg.com/236x/24/f5/29/24f529f27ec6998551d4abdd846adda3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-<script>
-  document.getElementById("category").addEventListener("change", function () {
-    const selectedCategory = this.options[this.selectedIndex];
-    document.getElementById("category_id").value = selectedCategory.value;
-  });
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-  document.getElementById("recipeForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+h1{
+    font-family: Lobster;
+    text-align: center;
+    font-size: 80px;
+    color: #ddd;
+}
 
-    const formData = new FormData(this);
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: lexend;
+    color: #ddd;
+}
 
-    fetch("/new_recipe", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok " + response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
-</script>
-{% endblock %}
+p{
+    text-align: center;
+    font-family: lexend;
+    color: #ddd;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: lexend;
+    color: #ddd;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: rgb(202, 62, 11);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: lexend;
+}
+
+button:hover {
+    background-color: #ff8c00;
+}
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Dish Discovery</h1>
+    </div>
+    <div class="heading">
+        <h2>Create and Share Recipes</h2>
+        <p>Do you have an idea in mind that you would like to share with the community. We'd love to see you share your dish instructions.</p>
+    </div>
+    <div class="container">
+
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="recipe-name">Recipe Name:</label>
+                <input placeholder="..." type="text" id="recipe-name" name="recipe-name" /required>
+            </div>
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <textarea placeholder="Give a brief description about your recipe..."  id="Description" name="Description" rows="5" /required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ingredients">Ingredients:</label>
+                <textarea placeholder="List your ingredients..." id="ingredients" name="ingredients" rows="5" /required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="instructions">Instructions:</label>
+                <textarea placeholder="Provide the instructions on how to prepare your meal..." id="instructions" name="instructions" rows="10" /required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <button type="submit">Share Recipe</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Dish Discovery.</p>
+        <p>All rights reserved.</p>
+    </div>
+</body>
+</html>
+

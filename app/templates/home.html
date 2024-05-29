@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Discovery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="home.js"></script>
+<style>
+    
+body {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-image: url("https://i.pinimg.com/236x/04/9a/40/049a404bc1bf71c250ea6fce208ba020.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: lexend;
+}
+
+.landing-page{
+    font-family: lexend;
+}
+
+h3, h4 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    font-family: lexend;
+    font-size: 14px;
+}
+
+.header {
+    background-image: none ;
+    padding: 30px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    width: 100%; 
+}
+
+h1{
+    font-size: 80px;
+    margin-bottom: 20px;
+    color: #ddd;
+    font-family: lobster;
+}
+
+h1::first-letter {
+    font-size: 100px;
+    color: orangered;
+}
+
+h2{
+    text-align: center;
+    color: #ddd;
+    font-family: lexend;
+    margin-top: 2cm;
+}
+
+.tagline {
+    font-size: 18px;
+    color:#ddd;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: none;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.items, .primary-button {
+    display: flex;
+    align-items: center;
+    margin-left: 1cm;
+}
+
+.items div, .primary-button div {
+    margin-right: 20px;
+}
+
+button {
+    background-color: rgb(202, 62, 11);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:orange;
+}
+
+/* Content Area */
+.content {
+    display: flex;
+}
+
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid rgb(202, 62, 11);
+    border-radius: 10px;
+    box-sizing: border-box;
+    }
+
+.sidebar {
+    padding: 20px;
+    border-right: 2px solid #0c0000;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    row-gap: 6px;
+}
+
+.menu-item h4, .menu-item p {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    gap: 6px;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.img-gallery{
+    width: 80%;
+    margin: 100px auto 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
+    border-radius: 25px;
+}
+
+.img-gallery img{
+    width: 80%;
+    height: 200px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: 0.2s;
+
+}
+
+.img-gallery img:hover{
+    width: 350px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: 0 32px 75px, rgba(68,77,136,0.2);
+}
+
+.trending-recipes h4, .most-saved-recipes h4, .latest-recipes h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: lexend;
+    color: #ddd;
+}
+
+.recipes-menus {
+    font-size: 16px;
+    color: #ddd;
+}
+
+.image-1, .image-2, .image-3 {
+    max-width: 150px;
+    border-radius: 8px;
+}
+
+.image img {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+
+.full-img{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.full-img img{
+    width: 90%;
+    max-width: 500px;
+}
+
+.full-img span{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+
+.search{
+    border-radius: 6px;
+    border: brown ;
+    background-color: none;
+}
+.search button{
+    border-radius: 20px;
+}
+
+.latest-recipes, .most-saved-recipes, .trending-recipes{
+    background: none;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0);
+    margin: 40px auto;
+    width: 90%;
+    padding: 20px;
+    text-align: center;
+    font-family: lexend;
+}
+h5{
+    text-align: center;
+    font-family: lexend;
+    color: #ddd;
+    font-size: 25px;
+}
+
+.today-img img{
+    border-radius: 10px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h4{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.recipes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recipe {
+    display: flex;
+    align-items: center;
+    background-color: none;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 10px 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-image img{
+    width: 230px;
+    border-radius: 8px;
+    margin-right: 20px;
+    border-radius: 15px;
+    height: 200px;
+    transition: 0.4s;
+}
+
+.recipe-image img:hover{
+    transform: scale(0.8) rotate(20deg);
+}
+
+.recipe-info {
+    flex: 1;
+    color: #ddd;
+    font-size: 15px;
+}
+
+.recipe-info h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #ddd;
+    gap: 40px;
+}
+
+.recipe-info p {
+    margin: 0;
+    color: #ddd;
+    font-size: 14px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* Highlights */
+.highlight {
+    padding: 20px;
+    background-color: none;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.highlight h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: rgb(202, 62, 11);
+}
+
+.highlight p {
+    line-height: 1.5;
+    color: #ddd;
+}
+
+/* Footer */
+.footer {
+    background-color: none;
+    color: white;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-section p {
+    margin-bottom: 20px;
+}
+
+.footer-rights{
+    color: #ddd;
+    text-align: center;
+    margin: 30px;
+}
+
+
+
+</style>
+</head>
+<body>
+        <div class="landing-page">
+            <div class="header">
+                <span class="dish-discovery"><h1>Dish Discovery</h1></span>
+                <p class="tagline">Unleash your inner chef, where every recipe tells a story!</p>
+            </div>
+            <div class="navigation">
+                <div class="items">
+                    <div class="button">
+                        <span class="subscribe">
+                            <button><a href="#">Subscribe</a></button>
+                        </span>
+                    </div>
+                    <div class="button">
+                        <span class="sign-up">
+                            <button><a href="signup.html">Sign Up</a></button>
+                        </span>
+                    </div>
+                    <div class="button">
+                        <span class="sign-in">
+                            <button><a href="signin.html">Sign in</a></button>
+                        </span>
+                    </div>
+                    <div class="search">
+                        <button><input type="search" id="search" name="search" placeholder="search..."><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="content">
+                <div class="sidebar">
+                    <div class="title">Navigate</div>
+                    <div class="menu-item">
+                        <span class="glyphicon glyphicon-thumbs-up"></span></span><a href="reviews.html">Reviews</a>
+                    </div>
+                    <div class="menu-item">
+                        <span class="glyphicon glyphicon-share"></span><a href="share.html">Share/Create</a>
+                    </div>
+                    <div class="menu-item">
+                        <span class="glyphicon glyphicon-folder-open"></span></span><a href="savedrecipes.html">Personalized recipes</a>
+                    </div>
+                </div>
+                <div class="main-content">
+                    
+                    <div class="#">
+                        <div class="cook-today">
+                            <h5><strong>WHAT TO COOK TODAY</strong></h5>
+                            <div id="featured-recipe">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h2><b>Gallery</b></h2>
+                            <div class="full-img" id="fullImgBox">
+                                <img src="https://i.pinimg.com/236x/03/cc/b7/03ccb75776a9989adef119d76f7357f6.jpg" alt="image-gallery" id="fullImg">
+                                <span onclick="closeFullImg()">x</span>
+                            </div>
+                            <div class="img-gallery">
+                                <img src="https://i.pinimg.com/236x/03/cc/b7/03ccb75776a9989adef119d76f7357f6.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/64/f4/40/64f4400d5c1f141a791984f07bddcb90.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/a8/4f/50/a84f502dddb85130f7a75cd060039464.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/6e/ac/14/6eac14762bb8047381b3115852f82e6d.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/474x/d8/64/75/d86475ca291d52a56a883a86fa70ee9f.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/2b/63/eb/2b63eb4b22e1f9ddbd069ec6805420ec.jpg" alt="image-gallery" onclick="openfullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/f0/d1/68/f0d16840faf2c5dd61982070855ff926.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/21/df/96/21df96006c59cd58520420bdcec74c33.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                                <img src="https://i.pinimg.com/236x/b0/da/38/b0da38ec0ea01fab2673602f915ca2fb.jpg" alt="image-gallery" onclick="openFullImg(this.src)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trending-recipes">
+                        <h4 class="heading">Trending Recipes</h4>
+                        <div class="recipe" id="item1" onclick="addToFavorites('item1')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/5e/cf/3f/5ecf3ff98f3a0569d8e380f29364a178.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Spicy Thai Noodles</b></button></h5>
+                                <p class="recipe-description">A delicious mix of noodles, vegetables, and spicy sauce that brings the heat and flavor.</p>
+                                <a href="#" class="recipe-link">Read More...</a>
+                                 <div>
+                                    <button id="fav" onclick="addtofavorites(item1)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe" id="item2" onclick="addToFavorites('item2')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/29/13/16/291316cf7635a459dc64c6e78a0d5864.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Classic Margherita Pizza</b></button></h5>
+                                <p class="recipe-description">A simple yet delightful pizza with fresh tomatoes, mozzarella, and basil.</p>
+                                <a href="#" class="recipe-link">Read More...</a>
+                                <div>
+                                    <button id="fav" onclick="addtofavorites(item2)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe" id="item3" onclick="addToFavorites('item3')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/63/89/01/63890109354834e0f6730013297211f8.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Chocolate Lava Cake</b></button></h5>
+                                <p class="recipe-description">Indulge in a rich, molten chocolate cake that's a perfect dessert for any occasion.</p>
+                                <a href="#" class="recipe-link">Read More...</a>
+                                 <div>
+                                    <button id="fav" onclick="addtofavorites(item3)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="most-saved-recipes">
+                        <h4 class="heading">Most Saved Recipes</h4>
+                        <div class="recipe" id="item4" onclick="addToFavorites('item4')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/f9/b4/b4/f9b4b47c47056d4398ee603156252afc.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Garlic Butter Shrimp</b></button></h5>
+                                <p class="recipe-description">This garlic butter shrimp is easy to make and packed with flavor, perfect for a quick dinner.</p>
+                                <a href="#" class="recipe-link">View Recipe</a>
+                                 <div>
+                                    <button id="fav" onclick="addtofavorites(item4)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe" id="item5" onclick="addToFavorites('item5')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/ce/e4/cf/cee4cf261e035f02425e1f3db3555214.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Homemade Guacamole</b></button></h5>
+                                <p class="recipe-description">Fresh and delicious guacamole made with ripe avocados, lime juice, and cilantro.</p>
+                                <a href="#" class="recipe-link">View Recipe</a>
+                                 <div>
+                                    <button id="fav" onclick="addtofavorites(item5)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe" id="item6" onclick="addToFavorites('item6')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/f5/ab/e2/f5abe20a0f6be8443647e6864b0c734e.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Classic Pancakes</b></button></h5>
+                                <p class="recipe-description">Fluffy and light, these classic pancakes are a perfect breakfast treat.</p>
+                                <a href="#" class="recipe-link">View Recipe</a>
+                                <div>
+                                    <button id="fav" onclick="addtofavorites(item6)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="latest-recipes">
+                        <h4 class="heading">Latest Recipes</h4>
+                        <div class="recipe" id="item7" onclick="addToFavorites('item7')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/3b/90/ef/3b90ef468213af9b06ab7dc0102e377d.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Creamy Tomato Basil Soup</b></button></h5>
+                                <p class="recipe-description">This creamy tomato basil soup is comforting and perfect for a cozy night in.</p>
+                                <a href="#" class="recipe-link">View Recipe</a>
+                                 <div>
+                                    <button id="fav" onclick="addtofavorites(item7)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe" id="item8" onclick="addToFavorites('item8')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/cc/14/0c/cc140c65e5fb7827100b15c43b18a18c.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Grilled Lemon Herb Chicken</b></button></h5>
+                                <p class="recipe-description">Juicy and flavorful grilled chicken marinated in lemon and herbs.</p>
+                                <a href="#" class="recipe-link">View Recipe</a>
+                                 <div>
+                                    <button id="fav" onclick="addtofavorites(item8)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe" id="item9" onclick="addToFavorites('item9')">
+                            <div class="recipe-image">
+                                <img src="https://i.pinimg.com/236x/87/f7/cf/87f7cf2a0ff859ff5b1f62f7df6ad52e.jpg" alt="Recipe Image" class="image">
+                            </div>
+                            <div class="recipe-info">
+                                <h5 class="recipe-title"><button><b>Vegetarian Tacos</b></button></h5>
+                                <p class="recipe-description">These vegetarian tacos are loaded with flavor and perfect for Taco Tuesday.</p>
+                                <a href="#" class="recipe-link">View Recipe</a>
+                                <div>
+                                    <button id="fav" onclick="addtofavorites(item9)"><span class="glyphicon glyphicon-heart-empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="highlight why-choose">
+                <h3>WHY CHOOSE DISH DISCOVERY</h3>
+                <p>We pride ourselves in offering the best to help you prepare the best delicacies and meals for the best nutritional benefits. Be it for home purposes or business, we got you covered with dish instructions to mouth watering dishes.</p>
+            </div>
+            <div class="highlight our-mission">
+                <h3>OUR MISSION</h3>
+                <p>We are dedicated to ensuring that our users only get the highest quality recipes to prepare their meals and the latest culinary techniques to ensure that every user gets healthy and tasty dishes. Your satisfaction and well-being are our top priorities.</p>
+            </div>
+            <div class="footer">
+                <div class="footer-container">
+                    <div class="footer-section">
+                        <h3><i class="material-icons">call</i>Contact Us</h3>
+                        <p>Email: DishDiscovery@gmail.com</p>
+                        <p>Tel: +254(0) 222 378 597</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3><i class="fa fa-check-square-o" style="font-size:24px"></i>Join Us</h3>
+                        <p>Become a part of our community and get access to exclusive recipes, cooking tips, and more!</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3><i class="fa fa-bars"></i>Vote of Thanks</h3>
+                        <p>Thank you for being a part of Culinary Delights. Here’s to many more years of delicious discoveries and culinary adventures!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-rights">
+            <p>&copy; 2024 Dish Discovery.</p>
+            <p>All rights reserved.</p>
+        </div>
+
+</body>
+</html>
+
