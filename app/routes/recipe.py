@@ -41,10 +41,13 @@ def create_recipe():
             user_id=current_user.id,
             category_id=category_id
         )
+
+        response_data = recipe.to_dict()
+        response_data['id'] = Recipe.query.order_by(Recipe.id.desc()).first().id
         
         db.session.add(recipe)
         db.session.commit()
-        return redirect(url_for('home.index'))
+        return jsonify(response_data), 201
     
     except Exception as e:
         db.session.rollback()

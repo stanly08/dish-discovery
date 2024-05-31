@@ -1,0 +1,74 @@
+body {
+  font-family: "Lexend", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #b4c1f7;
+}
+
+.heading {
+  color: rgb(202, 62, 11);
+  font-size: 40px;
+  text-align: center;
+  font-family: "Lobster", cursive;
+}
+
+.container {
+  width: auto;
+  height: 50%;
+  background-color: rgb(56, 95, 211);
+  padding: 20px;
+  margin: 50px auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  opacity: 80%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  color: white;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid rgb(202, 62, 11);
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: "Lexend", sans-serif;
+}
+
+input[type="submit"] {
+  background-color: rgb(62, 11, 202);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: "Lexend", sans-serif;
+}
+
+input[type="submit"]:hover {
+  background-color: #ff8c00;
+}
+
+p {
+  text-align: center;
+  color: white;
+}
+
+svg {
+  display: block;
+  width: 20%;
+  height: 20%;
+}
