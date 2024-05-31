@@ -32,7 +32,7 @@ h2 {
 label {
   display: block;
   margin-top: 20px;
-  color: white;
+  color: rgb(22, 21, 21);
 }
 
 input[type="text"],
