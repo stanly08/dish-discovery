@@ -3,7 +3,7 @@ This is the file for the recipe routes
 """
 from flask import Blueprint, request, jsonify, render_template, url_for, current_app, redirect
 from flask_login import login_required, current_user
-from app.models import Recipe, Category, Comment
+from app.models import Recipe, Category, Comment, SavedRecipe
 from app import db, Config
 from werkzeug.utils import secure_filename
 import os
@@ -41,12 +41,11 @@ def create_recipe():
             user_id=current_user.id,
             category_id=category_id
         )
-
-        response_data = recipe.to_dict()
-        response_data['id'] = Recipe.query.order_by(Recipe.id.desc()).first().id
         
         db.session.add(recipe)
         db.session.commit()
+        response_data = recipe.to_dict()
+        response_data['id'] = Recipe.query.order_by(Recipe.id.desc()).first().id
         return jsonify(response_data), 201
     
     except Exception as e:
@@ -64,12 +63,12 @@ def create_recipe_page():
 
 
 @recipe_bp.route('/allrecipes', methods=['GET'])
-def get_recipes():
+def view_all_recipes():
     """
     This function returns all recipes
     """
     recipes = Recipe.query.all()
-    return jsonify([recipe.to_dict() for recipe in recipes])
+    return render_template('all.html', recipes=recipes)
 
 @recipe_bp.route('/recipe/<int:recipe_id>', methods=['GET'])
 def get_recipe(recipe_id):
@@ -90,12 +89,17 @@ def get_recipe(recipe_id):
     recipe_dict['category'] = category
     recipe_dict['comments'] = comments
 
+    saved_recipe = SavedRecipe.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
+    recipe_already_saved = saved_recipe is not None
+    is_saved = "yes" if recipe_already_saved else "no"
+    recipe_dict['is_saved'] = is_saved
     return render_template('recipe.html', recipe=recipe_dict)
 
 
 @recipe_bp.route('/recipe/<int:recipe_id>/comment', methods=['POST'])
 @login_required
 def add_comment(recipe_id):
+    """route for adding a comment to a recipe"""
     content = request.form['content']
     comment = Comment(content=content, user_id=current_user.id, recipe_id=recipe_id)
     db.session.add(comment)
@@ -105,6 +109,7 @@ def add_comment(recipe_id):
 @recipe_bp.route('/recipe/<int:recipe_id>/edit', methods=['POST'])
 @login_required
 def edit_recipe(recipe_id):
+    """route for editing a recipe"""
     recipe = Recipe.query.get(recipe_id)
     if recipe.user_id != current_user.id:
         return render_template('error.html', message='You do not have permission to edit this recipe'), 403
@@ -119,6 +124,7 @@ def edit_recipe(recipe_id):
 @recipe_bp.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
 @login_required
 def delete_recipe(recipe_id):
+    """route for deleting a recipe"""
     recipe = Recipe.query.get(recipe_id)
     if recipe.user_id != current_user.id:
         return render_template('error.html', message='You do not have permission to delete this recipe'), 403
@@ -127,4 +133,18 @@ def delete_recipe(recipe_id):
     db.session.commit()
     return redirect(url_for('home.index'))
 
+@recipe_bp.route('/recipe/<int:recipe_id>')
+@login_required
+def view_recipe(recipe_id):
+    """route for viewing a recipe"""
+    recipe = Recipe.query.get_or_404(recipe_id)
+    recipe_already_saved = SavedRecipe.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
+    return render_template('recipe.html', recipe=recipe, recipe_already_saved=recipe_already_saved)
 
+@recipe_bp.route('/saved_recipes')
+@login_required
+def saved_recipes():
+    """route for displaying saved recipes"""
+    saved_recipes = SavedRecipe.query.filter_by(user_id=current_user.id).all()
+    recipes = [saved_recipe.recipe for saved_recipe in saved_recipes]
+    return render_template('saved_recipes.html', recipes=recipes)

@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}All Recipes - Dish Discovery{% endblock %} {% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recipe.css') }}" />
+{% endblock %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">All Recipes</h1>
+      {% if recipes %}
+      <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">{{ recipe.description[:100] }}...</p>
+              <a href="{{ url_for('recipe.view_recipe', recipe_id=recipe.id) }}" class="btn btn-primary">View Recipe</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="alert alert-warning" role="alert">No recipes found.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

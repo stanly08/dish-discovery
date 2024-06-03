@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block title %} Recipe - Dish Discovery {% endblock %}{% block styles %}
-<link rel="stylesheet" href="../static/css/recipe.css " /> {% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Recipe - Dish Discovery{% endblock %} {% block styles %}
+<link rel="stylesheet" href="../static/css/recipe.css" />
+{% endblock %} {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-8">
@@ -40,20 +41,33 @@
       </ul>
       {% else %}
       <p>No comments yet.</p>
-      {% endif %} {% if current_user.is_authenticated and current_user.id == recipe.user_id %}
+      {% endif %}
       <div class="mt-4">
+        {% if current_user.is_authenticated and current_user.id == recipe.user_id %}
         <a href="{{ url_for('recipe.edit_recipe', recipe_id=recipe.id) }}" class="btn btn-primary mr-3">Edit Recipe</a>
         <form action="{{ url_for('recipe.delete_recipe', recipe_id=recipe.id) }}" method="post" style="display: inline">
           <button type="submit" class="btn btn-danger">Delete Recipe</button>
         </form>
+        {% endif %} {% if current_user.is_authenticated %}
+        <form id="save-recipe-form" action="{{ url_for('save_unsave_recipe.save_recipe', recipe_id=recipe.id) }}" method="POST">
+          <button type="button" class="btn btn-primary ml-3" id="save-recipe-btn">Save Recipe</button>
+        </form>
+        <form
+          id="unsave-recipe-form"
+          action="{{ url_for('save_unsave_recipe.unsave_recipe', recipe_id=recipe.id) }}"
+          method="POST"
+        >
+          <button type="button" class="btn btn-danger ml-3" id="unsave-recipe-btn">Unsave Recipe</button>
+        </form>
+        <p id="message"></p>
+        {% endif %}
       </div>
-      {% endif %}
     </div>
     {% if current_user.is_authenticated %}
     <div class="col-md-4">
-      <div class="card">
+      <div class="card sticky-center">
         <div class="card-body">
-          <h5 class="card-title">Add a Comment</h5>
+          <h5 class="card-title">{{ current_user.username }}, please add a comment</h5>
           <form action="{{ url_for('recipe.add_comment', recipe_id=recipe.id) }}" method="post">
             <div class="form-group">
               <textarea class="form-control" name="content" required></textarea>
@@ -66,4 +80,57 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    console.log("Document is ready.");
+    var is_saved = "{{ recipe.is_saved }}";
+    console.log("Is saved:", is_saved);
+    console.log("Recipe already saved:", is_saved);
+
+    if (is_saved === "yes") {
+      $("#save-recipe-btn").hide();
+      $("#unsave-recipe-btn").show();
+    } else {
+      $("#save-recipe-btn").show();
+      $("#unsave-recipe-btn").hide();
+    }
+
+    $("#save-recipe-btn").click(function () {
+      console.log("Save button clicked.");
+      $.ajax({
+        url: $("#save-recipe-form").attr("action"),
+        type: "POST",
+        success: function (response) {
+          console.log("Save successful:", response);
+          $("#message").text(response.message).css("color", "green");
+          $("#save-recipe-btn").hide();
+          $("#unsave-recipe-btn").show();
+        },
+        error: function (response) {
+          console.log("Save failed:", response);
+          $("#message").text(response.responseJSON.error).css("color", "red");
+        },
+      });
+    });
+
+    $("#unsave-recipe-btn").click(function () {
+      console.log("Unsave button clicked.");
+      $.ajax({
+        url: $("#unsave-recipe-form").attr("action"),
+        type: "DELETE",
+        success: function (response) {
+          console.log("Unsave successful:", response);
+          $("#message").text(response.message).css("color", "green");
+          $("#unsave-recipe-btn").hide();
+          $("#save-recipe-btn").show();
+        },
+        error: function (response) {
+          console.log("Unsave failed:", response);
+          $("#message").text(response.responseJSON.error).css("color", "red");
+        },
+      });
+    });
+  });
+</script>
 {% endblock %}

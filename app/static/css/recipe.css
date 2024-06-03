@@ -125,3 +125,9 @@ textarea.form-control {
 .text-muted {
   color: #6c757d;
 }
+
+.sticky-center {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  // Tab navigation logic
   const tabButtons = document.querySelectorAll(".tab-button");
   const tabContents = document.querySelectorAll(".tab-pane");
 
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 
-  // Form handling logic
+  /** Form handling logic **/
   const categoryElement = document.getElementById("category");
   if (categoryElement) {
     categoryElement.addEventListener("change", function () {
@@ -77,20 +76,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
         })
         .then((data) => {
           console.log("Success:", data);
-          // Handle successful form submission
           alert("Recipe created successfully!");
-          // Redirect to the created recipe page
           window.location.href = `/recipe/${data.id}`;
         })
         .catch((error) => {
           console.error("Error:", error);
-          // Handle error in form submission
           alert("An error occurred while creating the recipe: " + error.message);
         });
     });
   }
 
-  // Auto-resize textareas
+  /* Auto-resize textareas */
   const textareas = document.querySelectorAll(".auto-resize");
   textareas.forEach((textarea) => {
     textarea.addEventListener("input", autoResize);
