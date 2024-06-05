@@ -16,10 +16,12 @@ jobs:
     - name: Install SSH client
       run: sudo apt-get install openssh-client
 
+    - name: Debug SSH key
+      run: echo "SSH_PUBLIC_KEY: $SSH_PUBLIC_KEY"
+
     - name: Use SSH key for authentication
       run: |
         echo "$SSH_PUBLIC_KEY" > ssh_key
         chmod 600 ssh_key
         ssh -o StrictHostKeyChecking=no -i ssh_key root@159.203.160.8 'bash -s' < /root/dish-discovery/deploy.sh
-
 
