@@ -72,3 +72,7 @@ def register():
             flash('Account created successfully.', 'success')
             return redirect(url_for('home.login'))
     return render_template('register.html', form=form)
+
+@home_bp.route('/about')
+def about():
+    return render_template('about.html')

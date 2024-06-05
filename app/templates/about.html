@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block title %}About - Dish Discovery{% endblock %} {% block content %}
+<section class="jumbotron text-center">
+  <h1 class="display-4">About Dish Discovery</h1>
+  <p class="lead">
+    Dish Discovery is a platform for food enthusiasts to discover, share, and explore new dishes from around the world.
+  </p>
+</section>
+
+<section class="container">
+  <h2 class="text-center mb-4">Our Mission</h2>
+  <p>Dish Discovery aims to:</p>
+  <ul>
+    <li>Empower home cooks and professional chefs alike to showcase their culinary creations.</li>
+    <li>Provide a platform for sharing recipes, cooking tips, and food-related experiences.</li>
+    <li>Connect food lovers from diverse backgrounds to celebrate their shared passion for cuisine.</li>
+  </ul>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Why Choose Dish Discovery?</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Discover New Recipes</h5>
+            <p class="card-text">
+              Browse a wide variety of recipes from around the world and find inspiration for your next meal.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Share Your Creations</h5>
+            <p class="card-text">
+              Share your own recipes, cooking techniques, and food experiences with the Dish Discovery community.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Connect with Food Lovers</h5>
+            <p class="card-text">
+              Connect with other food enthusiasts, exchange ideas, and join discussions about your favorite dishes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="text-center mb-4">Join the Dish Discovery Community</h2>
+  {% if current_user.is_authenticated %}
+  <p class="text-center">Ready to start exploring? <a href="#" class="btn btn-primary">Get Started</a></p>
+  {% else %}
+  <p class="text-center">
+    Join our community today and unlock a world of culinary delights!
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Sign Up</a>
+  </p>
+  {% endif %}
+</section>
+{% endblock %}
