@@ -20,7 +20,6 @@ jobs:
       run: |
         echo "$SSH_PUBLIC_KEY" > ssh_key
         chmod 600 ssh_key
-        ssh -o StrictHostKeyChecking=no -i ssh_key root@159.203.160.8 'bash -s' < deploy.sh
+        ssh -o StrictHostKeyChecking=no -i ssh_key root@159.203.160.8 'bash -s' < dish-discovery/deploy.sh
 
-    # Add additional steps as needed
 
