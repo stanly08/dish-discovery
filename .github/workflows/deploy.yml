@@ -1,21 +1,26 @@
-name: Deploy
+name: Deploy to Server
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Run deployment script
-        run: |
-          cd /root/dish-discovery/
-          chmod +x deploy.sh
-          ./deploy.sh
+    - name: Install SSH client
+      run: sudo apt-get install openssh-client
+
+    - name: Use SSH key for authentication
+      run: |
+        echo "$SSH_PUBLIC_KEY" > ssh_key
+        chmod 600 ssh_key
+        ssh -o StrictHostKeyChecking=no -i ssh_key root@159.203.160.8 'bash -s' < deploy.sh
+
+    # Add additional steps as needed
 

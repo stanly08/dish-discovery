@@ -1,7 +1,8 @@
 """
 File for the app package.
 """
-from flask import Flask, Markup
+from flask import Flask
+from markupsafe import Markup
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
