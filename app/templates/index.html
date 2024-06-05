@@ -129,17 +129,27 @@
       </div>
       <div class="col-md-4">
         <h5>Quick Links</h5>
+        {% if current_user.is_authenticated %}
+        <ul class="list-unstyled">
+          <li><a href="{{ url_for('home.logout') }}" class="text-light">Logout</a></li>
+          <li><a href="{{ url_for('recipe.create_recipe_page') }}" class="text-light">Create Recipe</a></li>
+          <li><a href="{{ url_for('recipe.saved_recipes') }}" class="text-light">Saved Recipes</a></li>
+          <li><a href="{{ url_for('recipe.view_all_recipes') }}" class="text-light">All Recipes</a></li>
+          <li><a href="{{ url_for('user_profile.user_profile', user_id=current_user.id) }}" class="text-light">My Profile</a></li>
+        </ul>
+        {% else %}
         <ul class="list-unstyled">
           <li><a href="{{ url_for('home.about') }}" class="text-light">About</a></li>
           <li><a href="{{ url_for('home.register') }}" class="text-light">Sign Up</a></li>
         </ul>
+        {% endif %}
       </div>
       <div class="col-md-4">
         <h5>Contact Us</h5>
         <ul class="list-unstyled">
-          <li>Email: info@dishdiscovery.com</li>
-          <li>Phone: +1 (123) 456-7890</li>
-          <li>Address: 123 Main Street, City, Country</li>
+          <li>Email: stan-edwin-jacky@dishdiscovery.com</li>
+          <li>Phone: +254700 00 11 22</li>
+          <li>Address: 4455-00100 Nairobi, Kenya</li>
         </ul>
       </div>
     </div>
