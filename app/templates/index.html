@@ -118,4 +118,33 @@
   </p>
   {% endif %}
 </section>
+
+<!-- Footer Section -->
+<footer class="footer bg-dark text-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>About Us</h5>
+        <p>Dish Discovery is a platform for food enthusiasts to discover, share, and explore new dishes from around the world.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="{{ url_for('home.about') }}" class="text-light">About</a></li>
+          <li><a href="{{ url_for('home.register') }}" class="text-light">Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Contact Us</h5>
+        <ul class="list-unstyled">
+          <li>Email: info@dishdiscovery.com</li>
+          <li>Phone: +1 (123) 456-7890</li>
+          <li>Address: 123 Main Street, City, Country</li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <p class="text-center">&copy; 2024 Dish Discovery. All rights reserved.</p>
+  </div>
+</footer>
 {% endblock %}
