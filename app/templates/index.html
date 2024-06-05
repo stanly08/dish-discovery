@@ -51,30 +51,71 @@
   </div>
 </div>
 
-<!-- About Us Section -->
-<section class="container py-5">
-  <h2>About Us</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed
-    nisi. Nulla quis sem at nibh elementum imperdiet.
+<section class="jumbotron text-center">
+  <h1 class="display-4">About Dish Discovery</h1>
+  <p class="lead">
+    Dish Discovery is a platform for food enthusiasts to discover, share, and explore new dishes from around the world.
   </p>
 </section>
 
-<!-- Contact Us Section -->
-<section class="container py-5">
-  <h2>Contact Us</h2>
-  <p>If you have any questions or feedback, feel free to contact us:</p>
+<section class="container">
+  <h2 class="text-center mb-4">Our Mission</h2>
+  <p>Dish Discovery aims to:</p>
   <ul>
-    <li>Email: info@dishdiscovery.com</li>
-    <li>Phone: +1 (123) 456-7890</li>
-    <li>Address: 123 Main Street, City, Country</li>
+    <li>Empower home cooks and professional chefs alike to showcase their culinary creations.</li>
+    <li>Provide a platform for sharing recipes, cooking tips, and food-related experiences.</li>
+    <li>Connect food lovers from diverse backgrounds to celebrate their shared passion for cuisine.</li>
   </ul>
 </section>
-
-<!-- Footer -->
-<footer class="footer mt-auto py-3">
-  <div class="container text-center">
-    <span class="text-muted">© 2022 Dish Discovery. All rights reserved.</span>
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Why Choose Dish Discovery?</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Discover New Recipes</h5>
+            <p class="card-text">
+              Browse a wide variety of recipes from around the world and find inspiration for your next meal.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Share Your Creations</h5>
+            <p class="card-text">
+              Share your own recipes, cooking techniques, and food experiences with the Dish Discovery community.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Connect with Food Lovers</h5>
+            <p class="card-text">
+              Connect with other food enthusiasts, exchange ideas, and join discussions about your favorite dishes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</footer>
+</section>
+<section class="container">
+  <h2 class="text-center mb-4">Join the Dish Discovery Community</h2>
+  {% if current_user.is_authenticated %}
+  <p class="text-center">
+    Ready to Create your Recipe?
+    <a href="{{ url_for('recipe.create_recipe_page') }}" class="btn btn-primary">Create Recipe</a>
+  </p>
+
+  {% else %}
+  <p class="text-center">
+    Ready to start exploring? <a href="{{ url_for('home.register') }}" class="btn btn-primary">Get Started</a>
+  </p>
+  {% endif %}
+</section>
 {% endblock %}
