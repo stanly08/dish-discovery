@@ -17,8 +17,10 @@ jobs:
       run: sudo apt-get install openssh-client
 
     - name: Use SSH key for authentication
+      env:
+        SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
       run: |
-        echo "$SSH_PUBLIC_KEY" > ssh_key
-        chmod 600 ssh_key
-        ssh -o StrictHostKeyChecking=no -i ssh_key root@159.203.160.8 'bash -s' < /root/dish-discovery/.github/scripts/deploy.sh
+        echo "$SSH_PUBLIC_KEY" > ssh_key.pub
+
+        ssh -o StrictHostKeyChecking=no -i ssh_key.pub root@159.203.160.8 'bash -s' < /root/dish-discovery/.github/scripts/deploy.sh
 
