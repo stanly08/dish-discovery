@@ -58,12 +58,13 @@
   <h2 class="text-center mb-4">Join the Dish Discovery Community</h2>
   {% if current_user.is_authenticated %}
   <p class="text-center">
-    Ready to start exploring? <a href="{{ url_for('home.register') }}" class="btn btn-primary">Get Started</a>
-  </p>
-  {% else %}
-  <p class="text-center">
     Ready to Create your Recipe?
     <a href="{{ url_for('recipe.create_recipe_page') }}" class="btn btn-primary">Create Recipe</a>
+  </p>
+
+  {% else %}
+  <p class="text-center">
+    Ready to start exploring? <a href="{{ url_for('home.register') }}" class="btn btn-primary">Get Started</a>
   </p>
   {% endif %}
 </section>
