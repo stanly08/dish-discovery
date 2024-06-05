@@ -89,10 +89,11 @@ def get_recipe(recipe_id):
     recipe_dict['category'] = category
     recipe_dict['comments'] = comments
 
-    saved_recipe = SavedRecipe.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
-    recipe_already_saved = saved_recipe is not None
-    is_saved = "yes" if recipe_already_saved else "no"
-    recipe_dict['is_saved'] = is_saved
+    if current_user.is_authenticated:
+        saved_recipe = SavedRecipe.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
+        recipe_already_saved = saved_recipe is not None
+        is_saved = "yes" if recipe_already_saved else "no"
+        recipe_dict['is_saved'] = is_saved
     return render_template('recipe.html', recipe=recipe_dict)
 
 

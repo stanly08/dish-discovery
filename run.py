@@ -2,7 +2,7 @@
 This is the main file for the application.
 """
 from app import create_app, db
-from app.models import db, User
+from app.models import User
 
 app = create_app()
 
