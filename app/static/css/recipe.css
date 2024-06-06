@@ -72,11 +72,16 @@ p {
 }
 
 .card {
-  margin-top: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-body {
-  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-title {
