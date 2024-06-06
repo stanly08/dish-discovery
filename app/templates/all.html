@@ -10,7 +10,9 @@
         {% for recipe in recipes %}
         <div class="col-md-4 mb-4">
           <div class="card h-100">
-            <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}" />
+            <div class="fixed-image">
+              <img src="{{ recipe.image_url }}" class="card-img-top" alt="{{ recipe.title }}" />
+            </div>
             <div class="card-body">
               <h5 class="card-title">{{ recipe.title }}</h5>
               <p class="card-text">{{ recipe.description[:100] }}...</p>
