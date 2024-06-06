@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block title %}Home - Dish Discovery{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Home - Dish Discovery{% endblock %} {% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+{% endblock %} {% block content %}
 <div class="jumbotron">
   {% if current_user.is_authenticated %}
   <h1 class="display-4">Hello, {{ current_user.username }}!</h1>
@@ -43,7 +45,7 @@
         </a>
         <div class="card-body">
           <h5 class="card-title"><a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a></h5>
-          <p class="card-text">{{ recipe.description | truncate(100, True, '...') }}</p>
+          <p class="card-text">{{ recipe.description | truncate(200, True, '...') }}</p>
         </div>
       </div>
     </div>
