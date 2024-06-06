@@ -43,7 +43,7 @@
         </a>
         <div class="card-body">
           <h5 class="card-title"><a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a></h5>
-          <p class="card-text">{{ recipe.description }}</p>
+          <p class="card-text">{{ recipe.description | truncate(100, True, '...') }}</p>
         </div>
       </div>
     </div>
