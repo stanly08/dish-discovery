@@ -34,4 +34,21 @@
     </div>
   </div>
 </div>
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Initialize CKEditor for text areas */
+    function initializeCKEditor(id) {
+      if (CKEDITOR.instances[id]) {
+        CKEDITOR.instances[id].destroy(true);
+      }
+      CKEDITOR.replace(id);
+    }
+
+    initializeCKEditor("description");
+    initializeCKEditor("ingredients");
+    initializeCKEditor("instructions");
+  });
+</script>
 {% endblock %}

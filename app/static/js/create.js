@@ -41,6 +41,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 
+  // Initialize CKEditor for text areas
+  CKEDITOR.replace("description");
+  CKEDITOR.replace("ingredients");
+  CKEDITOR.replace("instructions");
+
   /** Form handling logic **/
   const categoryElement = document.getElementById("category");
   if (categoryElement) {
@@ -57,6 +62,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
   if (recipeForm) {
     recipeForm.addEventListener("submit", function (event) {
       event.preventDefault();
+
+      // Update CKEditor instances before submitting the form
+      for (let instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+      }
 
       const formData = new FormData(this);
 

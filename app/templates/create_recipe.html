@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %} Create Recipe - Dish Discovery {% endblock %} {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}" /> {% endblock %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}" />
+{% endblock %} {% block content %}
 <div class="container">
   <h1>Create a New Recipe</h1>
   <div class="tab-container">
@@ -26,7 +27,7 @@
         <div class="tab-pane" id="tab-description">
           <div class="mb-3">
             <label for="description" class="form-label">Description:</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Description" required />
+            <textarea class="form-control" id="description" name="description" placeholder="Description" required></textarea>
           </div>
           <button type="button" class="prev-tab-btn btn btn-secondary" data-tab="tab-title">Previous</button>
           <button type="button" class="next-tab-btn btn btn-primary" data-tab="tab-ingredients">Next</button>
@@ -87,5 +88,13 @@
     </form>
   </div>
 </div>
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script src="{{ url_for('static', filename='js/create.js') }}"></script>
+<!-- <script>
+  // Initialize CKEditor for text areas
+  CKEDITOR.replace("description");
+  CKEDITOR.replace("ingredients");
+  CKEDITOR.replace("instructions");
+</script> -->
 {% endblock %}
