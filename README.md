@@ -1,15 +1,40 @@
 # Dish Discovery
 
-Dish discovery is a web application that allows users to create and share their own recipes to the database.
+Dish discovery is a web application that allows users to create and share their own recipes to the database.Users can sign up, log in, create recipes, and view recipes created by others. The application also supports commenting on recipes and saving favorite recipes.
+
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Manual Database Migrations](#manual-database-migrations)
+  - [Using MySQL](#using-mysql)
+- [Running the Application](#running-the-application)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [Authors](#authors)
+- [License](#license)
 
 ## Features
 
 - User Authentication: Sign up, log in and log out functionalities
-- Recipe Management: create, view, and manage recipes
+- Recipe Management: create, view, and delete recipes
 - Comments: Users can comment on the recipes
+- Save and Unsave favorite recipes
+- User profiles: users can view their details and the recipes they have done
 - Dynamic Recipe Display: Recipes are dynamically loading using JSON and Javascript
 
-## Installation
+## Getting Started
+
+### Prerequisites
+
+- Python 3.8+
+- Flask
+- SQLite (default) or any other SQLAlchemy-supported database
+
+### Installation
 
 1. Clone the repository
 
@@ -63,152 +88,34 @@ Dish discovery is a web application that allows users to create and share their 
    flask run
    ```
 
-8. Navigate to the home page `http://127.0.0.1:5000'
+### Manual Database Migrations
 
-## API Endpoints
+1. Initialize the migrations directory
 
-### 1. Create a Recipe
+```sh
+flask db init
+```
 
-- **URL**: `/new_recipe`
-- **Method**: `POST`
-- **Headers**: `Content-Type: application/json`
-- **Body**:
-  ```json
-  {
-    "title": "Recipe Title",
-    "description": "Recipe Description",
-    "ingredients": "List of ingredients",
-    "instructions": "Cooking instructions",
-    "image_url": "http://example.com/image.jpg",
-    "category_id": 1
-  }
-  ```
-- **Response**: `201 Created` with the created recipe in JSON format.
+2. Create an initial migration
 
-### 2. Get All Recipes
+```sh
+flask db migrate -m "initial migration"
+```
 
-- **URL**: `/allrecipes`
-- **Method**: `GET`
-- **Response**: `200 OK` with a list of recipes in JSON format.
+3. Apply the migration
 
-### Get a Single Recipe
-
-- **URL**: `/recipe/<recipe_id>`
-- **Method**: `GET`
-- **Response**: `200 OK` with the recipe details in JSON format, or `404 Not Found` if the recipe does not exist.
-
-### 3. Delete a Recipe
-
-**URL:** `/recipe/<int:recipe_id>/delete`  
-**Method:** `DELETE`  
-**Authentication:** Required
-
-Deletes a specific recipe.
-
-#### Response
-
-- **Success:**
-  - Status Code: `200`
-  - Body: `{"message": "Recipe deleted successfully"}`
-- **Failure:**
-  - Status Code: `403` if unauthorized
-  - Status Code: `404` if recipe not found
-  - Status Code: `500` if server error
-
-### 4. Save a Recipe
-
-**URL:** `/recipe/<int:recipe_id>/save`  
-**Method:** `POST`  
-**Authentication:** Required
-
-Saves a specific recipe for the current user.
-
-#### Response
-
-- **Success:**
-  - Status Code: `201`
-  - Body: `{"message": "Recipe saved successfully"}`
-- **Failure:**
-  - Status Code: `400` if recipe already saved
-  - Status Code: `404` if recipe not found
-  - Status Code: `500` if server error
-
-### 5. Unsave a Recipe
-
-**URL:** `/recipe/<int:recipe_id>/unsave`  
-**Method:** `DELETE`  
-**Authentication:** Required
-
-Unsaves a specific recipe for the current user.
-
-#### Response
-
-- **Success:**
-  - Status Code: `200`
-  - Body: `{"message": "Recipe unsaved successfully"}`
-- **Failure:**
-  - Status Code: `400` if recipe not saved
-  - Status Code: `404` if recipe not found
-  - Status Code: `500` if server error
-
-### 6. Search Recipes
-
-**URL:** `/search`  
-**Method:** `GET`
-
-Searches for recipes based on a query parameter.
-
-#### Query Parameters
-
-- `q`: The search query (required)
-
-#### Response
-
-- **Success:**
-  - Status Code: `200`
-  - Body: List of recipes matching the query
-- **Failure:**
-  - Status Code: `400` if query parameter is missing
-
-### 7. Edit a Recipe
-
-**URL:** `/recipe/<int:recipe_id>/edit`  
-**Method:** `GET` or `POST`  
-**Authentication:** Required
-
-Edits a specific recipe. The form submission should include the updated fields.
-
-#### Response
-
-- **Success:**
-  - Status Code: `200`
-  - Body: Updated recipe details
-- **Failure:**
-  - Status Code: `403` if unauthorized
-  - Status Code: `404` if recipe not found
-  - Status Code: `500` if server error
-
-### 8. View User Profile
-
-**URL:** `/user/<int:user_id>`  
-**Method:** `GET`
-
-Returns the profile and recipes of a specific user.
-
-#### Response
-
-- **Success:**
-  - Status Code: `200`
-  - Body: User profile and their recipes
-- **Failure:**
-  - Status Code: `404` if user not found
+```sh
+flask db upgrade
+```
 
 ## Using MySQL
 
 To use Mysql
+
 ```sh
     pip install flask-mysqldb
 ```
+
 ```sh
     pip install mysqlclient
 ```
@@ -225,8 +132,58 @@ Update the Config.py
     SQLALCHEMY_DATABASE_URI = f"mysql+mysqlclient://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DB}"
 ```
 
+## Project Structure
+
+dish-discovery/
+│
+├── app/
+│ ├── **init**.py
+│ ├── forms/
+│ │ ├── login.py
+│ ├── models/
+│ │ ├── **init**.py
+│ │ ├── user.py
+│ │ ├── recipe.py
+│ │ ├── comment.py
+│ ├── routes/
+│ │ ├── **init**.py
+│ │ ├── home.py
+│ │ ├── recipe.py
+│ ├── static/
+│ ├── templates/
+│ │ ├── base.html
+│ │ ├── index.html
+│ │ ├── login.html
+│ │ ├── register.html
+│
+├── migrations/
+│
+├── tests/
+│ ├── test_routes.py
+│ ├── test_models.py
+│
+├── .env.example
+├── config.py
+├── run.py
+├── requirements.txt
+└── README.md
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-branch).
+3. Make your changes.
+4. Commit your changes (git commit -am 'Add new feature').
+5. Push to the branch (git push origin feature-branch).
+6. Create a new Pull Request.
+
 ## Authors
 
 1. Jackline Wanjiku
 2. Edwin K. Orioki
 3. Stanly Anasi
+
+## License
+
+This project is licensed under the MIT License.
+See the LICENSE file for details.
