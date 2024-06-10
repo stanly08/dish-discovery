@@ -134,6 +134,7 @@ Update the Config.py
 
 ## Project Structure
 
+```sh
 dish-discovery/
 │
 ├── app/
@@ -167,6 +168,7 @@ dish-discovery/
 ├── run.py
 ├── requirements.txt
 └── README.md
+```
 
 ## Contributing
 
